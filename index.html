@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<style>
+    .container {
+        border: 1px solid grey;
+        border-radius: 4px;
+        width: auto;
+        display: flex;
+    }
+
+    .t-form {
+        margin: 10px 10px 10px 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    #textinput {
+        margin: 0 0 10px 0;
+        border-radius: 4px;
+        flex: 1;
+    }
+
+    .result-container {
+        overflow: hidden;
+        /* border: 1px solid gray; */
+        /* margin: 10px 10px 10px 10px; */
+        height: 85vh;
+        flex: 1;
+        border-radius: 4px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .result-box {
+        overflow: scroll;
+        border: 1px solid gray;
+        /* margin: 10px 10px 10px 10px;
+        height: 80vh; */
+        margin-bottom: 10px;
+        flex: 1;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .t-list {
+        list-style: none;
+    }
+</style>
+
+<body>
+
+    <div id="google_translate_element"></div>
+
+    <div class="container">
+        <form class="t-form" id="t-form">
+            <textarea name="textinput" id="textinput" cols="30" rows="10"></textarea>
+            <button type="submit" class="notranslate">Get Translations</button>
+        </form>
+        <!-- <p id="text1">Please create a new account</p> -->
+        <div class="result-container">
+            <div class="result-box" id="result-box">
+            </div>
+            <button type="submit" class="notranslate" onclick="copy()">Copy</button>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+        // let textHTMLCollection = document.getElementsByClassName('text')
+        let form = document.getElementById('t-form');
+        let resultBox = document.getElementById('result-box');
+        let storedText = '';
+        const getTranslate = (e) => {
+            event.preventDefault();
+            let value = e?.target?.textinput?.value;
+            let valueList = value.split('\n')
+            // console.log(value.split('\n'))
+            try {
+                // resultBox.removeChild("li")
+                valueList.forEach(tex => {
+                    if (tex && tex?.length > 0) {
+                        let li = document.createElement('li')
+                        li.className = 't-list'
+                        let labelSpan = document.createElement('span')
+                        labelSpan.className = 'notranslate'
+                        let valueSpan = document.createElement('span')
+                        const labelTextString = `"${tex}" : `
+                        const valueTextString = `"${tex}",`
+                        const labelText = document.createTextNode(labelTextString);
+                        const valueText = document.createTextNode(valueTextString);
+                        labelSpan.appendChild(labelText);
+                        valueSpan.appendChild(valueText);
+                        li.appendChild(labelSpan);
+                        li.appendChild(valueSpan);
+                        resultBox.appendChild(li);
+                        storedText = storedText + labelTextString + valueTextString
+                    }
+                });
+                console.log(storedText)
+
+            } catch (error) { }
+
+        }
+
+        const copy = () => { 
+            navigator.clipboard.writeText(storedText);
+            alert("Copied!");
+        }
+        form.addEventListener("submit", getTranslate);
+        // form.onsubmit = getTranslate()
+    </script>
+
+</body>
+
+</html>
