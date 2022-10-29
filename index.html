@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en-US">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
     .container {
-        border: 1px solid grey;
+        /* border: 1px solid grey;
         border-radius: 4px;
         width: auto;
-        display: flex;
+        display: flex; */
     }
 
     .t-form {
-        margin: 10px 10px 10px 10px;
+        height: 90vh;
+        /* margin: 10px 10px 10px 10px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        flex: 1;
+        flex: 1; */
     }
 
     #textinput {
-        margin: 0 0 10px 0;
+        /* margin: 0 0 10px 0;
         border-radius: 4px;
-        flex: 1;
+        flex: 1; */
     }
 
     .result-container {
-        overflow: hidden;
+        /* overflow: hidden; */
         /* border: 1px solid gray; */
         /* margin: 10px 10px 10px 10px; */
-        height: 85vh;
-        flex: 1;
+        /* height: 85vh; */
+        /* flex: 1;
         border-radius: 4px;
         padding: 10px;
         display: flex;
-        flex-direction: column;
+        flex-direction: column; */
     }
 
     .result-box {
         overflow: scroll;
-        border: 1px solid gray;
+        padding: 10px;
+        /* border: 1px solid gray; */
         /* margin: 10px 10px 10px 10px;
-        height: 80vh; */
-        margin-bottom: 10px;
+        /* margin-bottom: 10px;
         flex: 1;
         border-radius: 4px;
-        padding: 10px;
+        */
+    }
+
+    .wrapper {
+        height: 90vh;
     }
 
     .t-list {
@@ -54,19 +61,22 @@
 
     <div id="google_translate_element"></div>
 
-    <div class="container">
-        <form class="t-form" id="t-form">
-            <textarea name="textinput" id="textinput" cols="30" rows="10"></textarea>
-            <button type="submit" class="notranslate">Get Translations</button>
-        </form>
-        <!-- <p id="text1">Please create a new account</p> -->
-        <div class="result-container">
-            <div class="result-box" id="result-box">
+    <div class="container-lg">
+        <div class="card shadow-md d-flex flex-row wrapper">
+            <div class="w-50">
+                <form class="t-form d-flex flex-column p-2 h-100" id="t-form">
+                    <textarea name="textinput" id="textinput" rows="10" class="rounded-1 h-100 form-control border-secondary"></textarea>
+                    <button type="submit" class="notranslate btn btn-primary mt-2">Get Translations</button>
+                </form>
+
             </div>
-            <button type="submit" class="notranslate" onclick="copy()">Copy</button>
+            <!-- <p id="text1">Please create a new account</p> -->
+            <div class="result-container d-flex flex-column h-auto w-50 p-2">
+                <div class="result-box flex-fill border border-1 border-secondary rounded-1" id="result-box">
+                </div>
+                <button type="submit" class="notranslate btn btn-primary mt-2" onclick="copy()">Copy</button>
+            </div>
         </div>
-
-
     </div>
 
     <script type="text/javascript">
@@ -79,6 +89,9 @@
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="text/javascript" src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 </body>
 

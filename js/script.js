@@ -7,7 +7,9 @@ const getTranslate = (e) => {
     let valueList = value.split('\n')
     // console.log(value.split('\n'))
     try {
-        // resultBox.removeChild("li")
+        while (resultBox.hasChildNodes()) {
+            resultBox.removeChild(resultBox.firstChild);
+          }
         valueList.forEach(tex => {
             if (tex && tex?.length > 0) {
                 let li = document.createElement('li')
@@ -15,6 +17,7 @@ const getTranslate = (e) => {
                 let labelSpan = document.createElement('span')
                 labelSpan.className = 'notranslate'
                 let valueSpan = document.createElement('span')
+                labelSpan.className = 'translate'
                 const labelTextString = `"${tex}" : `
                 const valueTextString = `"${tex}",`
                 const labelText = document.createTextNode(labelTextString);
@@ -34,8 +37,11 @@ const getTranslate = (e) => {
 }
 
 const copy = () => {
+    let tListHtml = document.querySelectorAll('.t-list .translate');
+    let tList = Array.from(tListHtml)
+    console.log({tList: tList?.map(e=>e?.va)})
     navigator.clipboard.writeText(storedText);
-    alert("Copied!");
+    // alert("Copied!");
 }
 form.addEventListener("submit", getTranslate);
         // form.onsubmit = getTranslate()
